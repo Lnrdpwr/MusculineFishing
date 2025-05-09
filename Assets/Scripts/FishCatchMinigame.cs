@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FishCatchMinigame : MonoBehaviour
 {
     [Header("Minigame Settings")]
-    [SerializeField] private GameObject _effect;            // Эффект блесток
-    [SerializeField] private Transform _effectSpawn;
+    [SerializeField] private Animator _rodAnimator;         // Аниматор удочки
+    [SerializeField] private Animator _bubbleAnimator;      // Аниматор пузырей
+    [SerializeField] private Animator _manAnimator;         // Аниматор мужика
     [SerializeField] private FishingMinigame _minigame;     // Следующая миниигра
     [SerializeField] private float _effectTimer;            // Время существования эффекта
     [SerializeField] private float _minTimieBetweenEffects; // Минимальное время до спавна следующих блесток
@@ -25,16 +27,18 @@ public class FishCatchMinigame : MonoBehaviour
     {
         if (!_isGameActive) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isOnCooldown)
         {
-            if(_canCatch && !_isOnCooldown)
+            if(_canCatch)
             {
                 _minigame.StartGame();
+                _bubbleAnimator.SetBool("isActive", false);
                 _isGameActive = false;
             }
             else
             {
                 _isOnCooldown = true;
+                _manAnimator.SetTrigger("Unluck");
                 Invoke(nameof(ResetCooldown), _catchCooldown);
             }
         }
@@ -44,10 +48,12 @@ public class FishCatchMinigame : MonoBehaviour
     {
         if (!_isGameActive) return;
 
-        Instantiate(_effect, _effectSpawn.position, Quaternion.identity);
         _canCatch = true;
 
         float timeToNextEffect = Random.Range(_minTimieBetweenEffects, _maxTimieBetweenEffects);
+
+        _rodAnimator.SetBool("isActive", true);
+        _bubbleAnimator.SetBool("isActive", true);
 
         Invoke(nameof(SpawnParticle), timeToNextEffect);
         Invoke(nameof(StopCatching), _effectTimer);
@@ -55,7 +61,12 @@ public class FishCatchMinigame : MonoBehaviour
 
     private void StopCatching()
     {
+        if (!_isGameActive) return;
+
         _canCatch = false;
+
+        _rodAnimator.SetBool("isActive", false);
+        _bubbleAnimator.SetBool("isActive", false);
     }
 
     private void ResetCooldown()

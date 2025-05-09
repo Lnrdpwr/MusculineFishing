@@ -4,6 +4,9 @@ using UnityEngine.UI;
 public class FishingMinigame : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private FishCatchMinigame _previousMinigame;           // Предыдущая миниигра
+    [SerializeField] private Animator _rodAnimator;                         // Аниматор удочки
+    [SerializeField] private Animator _manAnimator;                         // Аниматор мужика
     [SerializeField] private float _fishMoveSpeed = 0.5f;                   // Скорость движения рыбы
     [SerializeField] private float _playerSliderRiseSpeed = 0.1f;           // Скорость подъёма слайдера при нажатии пробела
     [SerializeField] private float _playerSliderFallAcceleration = 0.05f;   // Ускорение падения слайдера
@@ -12,6 +15,8 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] private float _catchDrainSpeed = 0.1f;                 // Скорость опустошения шкалы
 
     [Header("UI References")]
+    [SerializeField] private Image _fillImage;                      // Image заполнения прогресса
+    [SerializeField] private Gradient _gradient;                    // Градиент заполнения прогресса
     [SerializeField] private GameObject _minigameParent;            // Родительский объект со всеми объектами
     [SerializeField] private Slider _playerSlider;                  // Слайдер игрока
     [SerializeField] private Slider _fishSlider;                    // Слайдер с рыбой
@@ -36,7 +41,6 @@ public class FishingMinigame : MonoBehaviour
         }
         else if (_catchProgressBar.value <= 0)
         {
-            Debug.Log("Рыба ушла!");
             EndGame(false);
         }
     }
@@ -53,7 +57,14 @@ public class FishingMinigame : MonoBehaviour
     private void EndGame(bool isSuccess)
     {
         _isGameActive = false;
+        _rodAnimator.SetBool("isActive", false);
         _minigameParent.SetActive(false);
+
+        if(!isSuccess)
+        {
+            _manAnimator.SetTrigger("Unluck");
+            _previousMinigame.StartGame();
+        }
     }
 
     private void UpdateFishPosition()
@@ -100,5 +111,6 @@ public class FishingMinigame : MonoBehaviour
         }
 
         _catchProgressBar.value = Mathf.Clamp01(_catchProgressBar.value);
+        _fillImage.color = _gradient.Evaluate(_catchProgressBar.value);
     }
 }

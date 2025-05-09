@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class BoxingMinigame : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private GameObject _sparkleEffect;         // Ёффект Ѕлесток
     [SerializeField] private GameObject _hitEffect;             // Ёффект удара
     [SerializeField] private GameObject _punchHitbox;           // ’итбокс по которому надо ударить
     [SerializeField] private Collider2D _fishCollider;          //  оллайдер рыбы
@@ -52,15 +51,18 @@ public class BoxingMinigame : MonoBehaviour
         {
             spawnPos = new Vector2(Random.Range(_bottomLeft.x, _topRight.x), Random.Range(_bottomLeft.y, _topRight.y));
         } while (!_fishCollider.OverlapPoint(spawnPos));
-        
-        Instantiate(_sparkleEffect, spawnPos, Quaternion.identity);
 
         _currentPunchHitbox = Instantiate(_punchHitbox, spawnPos, Quaternion.identity);
         _currentPunchHitbox.GetComponent<PunchHitbox>().Construct(this);
+
+        float spawnTime = Random.Range(_minTimeBetweenEffects, _maxTimeBetweenEffects);
+        Invoke(nameof(SpawnParticle), spawnTime);
     }
 
     public void Hit()
     {
+        Debug.Log("Hit");
+
         if (!_isGameActive) return;
 
         _fishAgility--;
@@ -102,15 +104,15 @@ public class BoxingMinigame : MonoBehaviour
     {
         for(float i = _boxingTime; i > 0; i -= Time.deltaTime)
         {
-            float seconds = Mathf.FloorToInt(i);
-            float miliseconds = Mathf.FloorToInt(i % 1);
+            float seconds = Mathf.FloorToInt(i % 60);
+            float miliseconds = Mathf.FloorToInt(i * 100 % 100);
 
-            _boxingTimer.text = string.Format("{0:00}:{1:00}", seconds, miliseconds);
+            _boxingTimer.text = string.Format("{0:0}.{1:00}", seconds, miliseconds);
 
             yield return new WaitForEndOfFrame();
         }
 
-        _boxingTimer.text = "00:00";
+        _boxingTimer.text = "0:00";
 
         StopGame();
     }
