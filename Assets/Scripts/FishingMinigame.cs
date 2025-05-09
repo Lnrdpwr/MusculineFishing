@@ -12,6 +12,7 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] private float _catchDrainSpeed = 0.1f;                 // Скорость опустошения шкалы
 
     [Header("UI References")]
+    [SerializeField] private GameObject _minigameParent;            // Родительский объект со всеми объектами
     [SerializeField] private Slider _playerSlider;                  // Слайдер игрока
     [SerializeField] private Slider _fishSlider;                    // Слайдер с рыбой
     [SerializeField] private Slider _catchProgressBar;              // Шкала заполнения ловли
@@ -19,11 +20,6 @@ public class FishingMinigame : MonoBehaviour
     private float _fishTargetPos; // Текущая цель рыбы (для плавного движения)
     private float _playerSliderSpeed = 0f;
     private bool _isGameActive;
-
-    private void Start()
-    {
-        StartGame();
-    }
 
     private void Update()
     {
@@ -45,9 +41,10 @@ public class FishingMinigame : MonoBehaviour
         }
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         _isGameActive = true;
+        _minigameParent.SetActive(true);
         _playerSlider.value = 0.5f;
         _catchProgressBar.value = 0.5f;
         SetRandomFishTarget();
@@ -56,7 +53,7 @@ public class FishingMinigame : MonoBehaviour
     private void EndGame(bool isSuccess)
     {
         _isGameActive = false;
-        // Здесь можно вызвать событие победы/поражения
+        _minigameParent.SetActive(false);
     }
 
     private void UpdateFishPosition()

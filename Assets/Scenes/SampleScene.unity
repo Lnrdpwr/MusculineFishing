@@ -771,6 +771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 617326329}
   - component: {fileID: 617326328}
+  - component: {fileID: 617326330}
   m_Layer: 0
   m_Name: FishingManager
   m_TagString: Untagged
@@ -796,6 +797,7 @@ MonoBehaviour:
   _catchThreshold: 0.12
   _catchFillSpeed: 0.1
   _catchDrainSpeed: 0.05
+  _minigameParent: {fileID: 961410050}
   _playerSlider: {fileID: 1087369670}
   _fishSlider: {fileID: 920358065}
   _catchProgressBar: {fileID: 1057568422}
@@ -814,6 +816,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &617326330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617326327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd70abea62d8fc24ea6c1be6fbcbdb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 2055322987053057595, guid: 089ad6e7e325bb1468acb8c116c2918e, type: 3}
+  _effectSpawn: {fileID: 1123079370}
+  _minigame: {fileID: 617326328}
+  _effectTimer: 0.5
+  _minTimieBetweenEffects: 2
+  _maxTimieBetweenEffects: 5
+  _catchCooldown: 1
 --- !u!1 &652194365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1657,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1 &1565796074
 GameObject:
