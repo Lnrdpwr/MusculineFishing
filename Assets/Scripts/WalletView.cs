@@ -22,6 +22,6 @@ public class WalletView : MonoBehaviour
     private void ChangeText()
     {
         int money = wallet.GetMoney();
-        _text.text = $"{money}$";
+        _text.text = $"{money}";
     }
 }

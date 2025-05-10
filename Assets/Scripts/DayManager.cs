@@ -12,15 +12,21 @@ public class DayManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text _dayTimer;
+    [SerializeField] private TMP_Text _dayCount;
 
     [Header("Beauty")]
     [SerializeField] private Animator _patternAnimator;
 
     private int _timeLeft;
 
+    private Coroutine _timerRoutine;
+
     private void Start()
     {
-        if(PlayerPrefs.GetInt("NewDay", 1) == 1)
+        int currentDay = PlayerPrefs.GetInt("Day", 0);
+        _dayCount.text = $"Day: {currentDay}";
+
+        if (PlayerPrefs.GetInt("NewDay", 1) == 1)
         {
             PlayerPrefs.SetInt("NewDay", 0);
             _timeLeft = _dayTime;
@@ -30,14 +36,19 @@ public class DayManager : MonoBehaviour
             _timeLeft = PlayerPrefs.GetInt("DayTimeLeft", _dayTime);
         }
 
-        _timeLeft = 60;
+        //_timeLeft = 60;
 
-        StartCoroutine(TimerRoutine());
+        _timerRoutine = StartCoroutine(TimerRoutine());
     }
 
     private void OnDisable()
     {
         PlayerPrefs.SetInt("DayTimeLeft", _timeLeft);
+    }
+
+    public void StopTimer()
+    {
+        StopCoroutine(_timerRoutine);
     }
 
     IEnumerator TimerRoutine()

@@ -843,7 +843,7 @@ MonoBehaviour:
   _hitEffect: {fileID: 1733637872235366761, guid: f8291be79120e794e93e0db294c9b5e8, type: 3}
   _punchHitbox: {fileID: 241455887182660177, guid: 3e02e6b7025d5c147aa112c4b9dbccd5, type: 3}
   _fishCollider: {fileID: 0}
-  _minTimeBetweenEffects: 0.7
+  _minTimeBetweenEffects: 0.5
   _maxTimeBetweenEffects: 1.2
   _effectExistTime: 0.7
   _boxingTime: 10
@@ -1040,7 +1040,9 @@ GameObject:
   - component: {fileID: 953643588}
   - component: {fileID: 953643590}
   - component: {fileID: 953643587}
-  m_Layer: 0
+  - component: {fileID: 953643592}
+  - component: {fileID: 953643591}
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1184,6 +1186,83 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &953643591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953643586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 35b2c8135cd47554eb3d9a4f6dc0c078, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!114 &953643592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953643586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 953643589}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1133677593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +2019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 155.99998, y: 178}
+  m_AnchoredPosition: {x: 155.99997, y: 233}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479048273
@@ -1978,8 +2057,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You also know that after catching a fish, \nit must be carefully beaten
-    on shiny points, \nbecause it's fun!"
+  m_text: "You also know that after catching \nthe fish, it must be carefully beaten
+    \non the shiny points, because otherwise \nyou will not cook a delicious soup!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dfc36aee644406f45b69d439fbc9607a, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 99fdc1909b3e1674d8e693b5017812ab, type: 2}

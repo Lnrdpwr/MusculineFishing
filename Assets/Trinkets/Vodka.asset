@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5d173a0efe0d64093f4ec0a3291572, type: 3}
-  m_Name: GoldenFish
+  m_Script: {fileID: 11500000, guid: ff518db729d5e0148b1028d396e39f0b, type: 3}
+  m_Name: Vodka
   m_EditorClassIdentifier: 
-  fishHealth: 0
-  fishTimer: 0
-  minTimeBetweenPunches: 0
-  maxTimeBetweenPunches: 0
-  fishReward: 0
-  quest: {fileID: 11400000, guid: 4e1ac5292247ab5499a29563f7c2f48d, type: 2}
+  sprite: {fileID: 117262281, guid: f364453619bfcf942a65171983849efa, type: 3}
+  trinketName: Vodka
+  trinketDescription: You won't regret it
+  price: 1

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FishingMinigame : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private DayManager _dayManager;                        // Менеджер дня
     [SerializeField] private FishCatchMinigame _previousMinigame;           // Предыдущая миниигра
     [SerializeField] private Animator _rodAnimator;                         // Аниматор удочки
     [SerializeField] private Animator _manAnimator;                         // Аниматор мужика
@@ -87,6 +88,8 @@ public class FishingMinigame : MonoBehaviour
 
         if (isSuccess)
         {
+            _dayManager.StopTimer();
+
             _finishFishAnimator.SetTrigger("Appear");
             _audioSource.PlayOneShot(_finishFishClip);
 
