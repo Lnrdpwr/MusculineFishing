@@ -84,4 +84,10 @@ public class FishCatchMinigame : MonoBehaviour
 
         Invoke(nameof(SpawnParticle), timeToNextEffect);
     }
+
+    public void StopGame()
+    {
+        _isGameActive = false;
+        _canCatch = false;
+    }
 }

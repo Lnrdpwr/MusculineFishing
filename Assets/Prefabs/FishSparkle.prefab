@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 241455887182660177}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.98003566, y: -0.5450541, z: 0.057864975}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.7
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1201,7 +1201,7 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1254,7 +1254,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1307,8 +1307,8 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 7.8539815
+      minMaxState: 3
+      scalar: 15.707963
       minScalar: -15.707963
       maxCurve:
         serializedVersion: 2
@@ -1369,7 +1369,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0.6835294}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1385,7 +1385,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 48496
+        atime1: 54510
         atime2: 65535
         atime3: 65535
         atime4: 0
@@ -1547,7 +1547,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 7482667652216324306, guid: 9263dcf45578299438e039bb6ba4282a, type: 3}
+    - sprite: {fileID: 2106096105, guid: 98a0cd5969cf964469f203a9ca54038a, type: 3}
+    - sprite: {fileID: -1917410411, guid: 98a0cd5969cf964469f203a9ca54038a, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:

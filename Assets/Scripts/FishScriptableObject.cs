@@ -1,11 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Fish", menuName = "Fish Data", order = 51)]
 public class FishScriptableObject : ScriptableObject
 {
-    [SerializeField] private float _fishAgility;
-    [SerializeField] private float _fishTimer;
-    [SerializeField] private int _fishReward;
+    [Header("Boxing")]
+    public int fishHealth;
+    public float fishTimer;
+    public float minTimeBetweenPunches;
+    public float maxTimeBetweenPunches;
+
+    [Header("Other")]
+    public int fishReward;
+    [Tooltip("Leave empty if basic fish")]
+    public QuestScriptableObject quest;
 }

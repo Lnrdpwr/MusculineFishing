@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FishingMinigame : MonoBehaviour
@@ -22,9 +24,23 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] private Slider _fishSlider;                    // Слайдер с рыбой
     [SerializeField] private Slider _catchProgressBar;              // Шкала заполнения ловли
 
+    [Header("Beauty")]
+    [SerializeField] private CameraEffects _cameraEffects;          // Эффекты камеры
+    [SerializeField] private Animator _patternAnimator;             // Для красивого перехода
+    [SerializeField] private Animator _finishFishAnimator;          // РАЗЪЕБ
+    [SerializeField] private AudioClip _finishFishClip;             // РАЗЪЕБ х2
+    [SerializeField] private AudioSource _musicSource;              // Сурс с музыкой
+
+    private AudioSource _audioSource;
+
     private float _fishTargetPos; // Текущая цель рыбы (для плавного движения)
     private float _playerSliderSpeed = 0f;
     private bool _isGameActive;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -36,7 +52,6 @@ public class FishingMinigame : MonoBehaviour
 
         if (_catchProgressBar.value >= 1)
         {
-            Debug.Log("Рыба поймана!");
             EndGame(true);
         }
         else if (_catchProgressBar.value <= 0)
@@ -47,6 +62,8 @@ public class FishingMinigame : MonoBehaviour
 
     public void StartGame()
     {
+        _cameraEffects.ZoomIn(0.5f);
+
         _isGameActive = true;
         _minigameParent.SetActive(true);
         _playerSlider.value = 0.5f;
@@ -54,8 +71,10 @@ public class FishingMinigame : MonoBehaviour
         SetRandomFishTarget();
     }
 
-    private void EndGame(bool isSuccess)
+    public void EndGame(bool isSuccess)
     {
+        _cameraEffects.ZoomOut(0.5f);
+
         _isGameActive = false;
         _rodAnimator.SetBool("isActive", false);
         _minigameParent.SetActive(false);
@@ -64,6 +83,14 @@ public class FishingMinigame : MonoBehaviour
         {
             _manAnimator.SetTrigger("Unluck");
             _previousMinigame.StartGame();
+        }
+
+        if (isSuccess)
+        {
+            _finishFishAnimator.SetTrigger("Appear");
+            _audioSource.PlayOneShot(_finishFishClip);
+
+            StartCoroutine(StopGameRoutine());
         }
     }
 
@@ -112,5 +139,16 @@ public class FishingMinigame : MonoBehaviour
 
         _catchProgressBar.value = Mathf.Clamp01(_catchProgressBar.value);
         _fillImage.color = _gradient.Evaluate(_catchProgressBar.value);
+    }
+
+    IEnumerator StopGameRoutine()
+    {
+        yield return new WaitWhile(()=> _audioSource.isPlaying);
+
+        _patternAnimator.SetTrigger("Appear");
+
+        yield return new WaitForSeconds(0.6f);
+
+        SceneManager.LoadScene("Boxing");
     }
 }

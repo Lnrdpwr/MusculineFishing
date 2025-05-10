@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e5d173a0efe0d64093f4ec0a3291572, type: 3}
-  m_Name: GoldenFish
+  m_Name: GreenFish
   m_EditorClassIdentifier: 
-  _fishAgility: 10
-  _fishTimer: 10
-  _fishReward: 100
+  fishHealth: 10
+  fishTimer: 14
+  minTimeBetweenPunches: 0.8
+  maxTimeBetweenPunches: 1.3
+  fishReward: 4
+  quest: {fileID: 0}
