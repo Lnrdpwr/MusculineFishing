@@ -35,5 +35,4 @@
 - Осознанному упрощению архитектуры под задачи проекта
 
 ## Ссылки
-- itch.io: [link]
-- Build: [link]
+- itch.io: https://fishcup.itch.io/musculine-fishing
