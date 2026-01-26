@@ -6,6 +6,12 @@
 
 > ⚠️ Актуальная версия проекта находится в ветке `dev_Lev`.
 
+
+
+https://github.com/user-attachments/assets/42d5f42c-0a2a-4090-9c3e-693d70894bec
+
+
+
 ## Платформа и технологии
 - Движок: Unity
 - Язык: C#
